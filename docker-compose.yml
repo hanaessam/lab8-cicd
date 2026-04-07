@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  app:
+    build: .                            # Build image from the Dockerfile in this directory
+    ports:
+      - "3000:3000"                     # Map EC2 port 3000 to container port 3000
+    environment:
+      - MONGO_URL=mongodb://mongo:27017
+      - MODE=docker
+    depends_on:
+      - mongo                           # Ensures mongo container starts before app
+
+  mongo:
+    image: mongo:7                      # Official MongoDB 7 image from Docker Hub
+    volumes:
+      # Named volume keeps data alive across container restarts
+      - mongo-data:/data/db
+      # Mount the seed script — MongoDB runs all .js files here on first start
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+# Declare the named volume at the top level
+volumes:
+  mongo-data:
