@@ -20,6 +20,7 @@ db.tasks.insertMany([
   { id: 17, name: 'Lentils', status: 'pending' },
   { id: 18, name: 'Chicken', status: 'done' },
   { id: 19, name: 'Beef', status: 'pending' },
-  { id: 20, name: 'Fish', status: 'done' }
+  { id: 20, name: 'Fish', status: 'done' },
+  { id: 21, name: 'Juice', status: 'pending' },
 ]);
 
