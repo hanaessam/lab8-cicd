@@ -31,7 +31,8 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/lab8-app:latest
-            docker stop myapp || true
-            docker rm myapp || true
-            docker run -d -p 3000:3000 --name myapp ${{ secrets.DOCKERHUB_USERNAME }}/lab8-app:latest
+            cd ~/lab8-cicd
+            git pull
+            docker compose pull
+            docker compose down
+            docker compose up -d
